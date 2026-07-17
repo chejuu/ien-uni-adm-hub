@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEN UNI HUB — La comunidad del Ingreso Escolar Nacional</title>
+  <meta name="description" content="La primera plataforma especializada en el Ingreso Escolar Nacional (IEN) de la Universidad Nacional de Ingeniería del Perú. Solucionarios, material, exámenes y más.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8',800:'#1E40AF',900:'#1E3A8A',950:'#172554' },
+            dark: { 800:'#1E293B',900:'#0F172A',950:'#020617' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ===== GEOMETRIC BACKGROUND ===== */
+    .geo-bg {
+      background-color: #0F172A;
+      background-image:
+        linear-gradient(30deg, rgba(59,130,246,0.07) 12%, transparent 12.5%, transparent 87%, rgba(59,130,246,0.07) 87.5%),
+        linear-gradient(150deg, rgba(59,130,246,0.07) 12%, transparent 12.5%, transparent 87%, rgba(59,130,246,0.07) 87.5%),
+        linear-gradient(30deg, rgba(59,130,246,0.07) 12%, transparent 12.5%, transparent 87%, rgba(59,130,246,0.07) 87.5%),
+        linear-gradient(150deg, rgba(59,130,246,0.07) 12%, transparent 12.5%, transparent 87%, rgba(59,130,246,0.07) 87.5%),
+        linear-gradient(60deg, rgba(37,99,235,0.05) 25%, transparent 25.5%, transparent 75%, rgba(37,99,235,0.05) 75%),
+        linear-gradient(60deg, rgba(37,99,235,0.05) 25%, transparent 25.5%, transparent 75%, rgba(37,99,235,0.05) 75%);
+      background-size: 80px 140px;
+      background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+    }
+    .geo-bg-light {
+      background-color: #F8FAFC;
+      background-image:
+        linear-gradient(30deg, rgba(59,130,246,0.04) 12%, transparent 12.5%, transparent 87%, rgba(59,130,246,0.04) 87.5%),
+        linear-gradient(150deg, rgba(59,130,246,0.04) 12%, transparent 12.5%, transparent 87%, rgba(59,130,246,0.04) 87.5%),
+        linear-gradient(60deg, rgba(37,99,235,0.03) 25%, transparent 25.5%, transparent 75%, rgba(37,99,235,0.03) 75%);
+      background-size: 80px 140px;
+      background-position: 0 0, 0 0, 0 0;
+    }
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; }
+      to { opacity:1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity:0; transform:translateX(-40px); }
+      to { opacity:1; transform:translateX(0); }
+    }
+    @keyframes countUp {
+      from { opacity:0; transform:scale(0.5); }
+      to { opacity:1; transform:scale(1); }
+    }
+    @keyframes float {
+      0%,100% { transform:translateY(0); }
+      50% { transform:translateY(-10px); }
+    }
+    @keyframes pulse-ring {
+      0% { transform:scale(1); opacity:0.5; }
+      100% { transform:scale(1.5); opacity:0; }
+    }
+    .animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+    .animate-slide-left { animation: slideInLeft 0.7s ease-out forwards; }
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .reveal { opacity:0; transform:translateY(30px); transition: all 0.7s cubic-bezier(0.4,0,0.2,1); }
+    .reveal.active { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    /* ===== CARD HOVER ===== */
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -12px rgba(59,130,246,0.15);
+    }
+    /* ===== GRADIENT TEXT ===== */
+    .gradient-text {
+      background: linear-gradient(135deg, #3B82F6, #1D4ED8, #60A5FA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* ===== TIMELINE ===== */
+    .timeline-line {
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #3B82F6, #1E40AF);
+    }
+    @media(min-width:768px) {
+      .timeline-line { left: 50%; transform: translateX(-50%); }
+    }
+    .timeline-dot {
+      position: absolute;
+      left: 16px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #3B82F6;
+      border: 3px solid #DBEAFE;
+      z-index: 2;
+    }
+    @media(min-width:768px) {
+      .timeline-dot { left: 50%; transform: translateX(-50%); }
+    }
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width:8px; }
+    ::-webkit-scrollbar-track { background:#0F172A; }
+    ::-webkit-scrollbar-thumb { background:#1E40AF; border-radius:4px; }
+    ::-webkit-scrollbar-thumb:hover { background:#2563EB; }
+    /* ===== WHATSAPP FLOAT ===== */
+    .wa-float {
+      position:fixed; bottom:24px; right:24px; z-index:999;
+      width:60px; height:60px; border-radius:50%;
+      background:#25D366; color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: all 0.3s ease;
+      cursor:pointer;
+    }
+    .wa-float:hover { transform:scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.5); }
+    .wa-float::before {
+      content:''; position:absolute; width:100%; height:100%; border-radius:50%;
+      background:#25D366; animation: pulse-ring 2s ease-out infinite;
+    }
+    /* ===== POMODORO ===== */
+    .pomodoro-ring {
+      stroke-dasharray: 565;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+    /* ===== NAV ACTIVE ===== */
+    .nav-link { position:relative; }
+    .nav-link::after {
+      content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px;
+      background:#3B82F6; transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width:100%; }
+    /* ===== TOOL TAB ===== */
+    .tool-tab.active-tab {
+      background: #2563EB; color: #fff;
+    }
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="font-sans bg-white text-dark-900 antialiased">
+
+  <!-- ============================== NAVBAR ============================== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <!-- Logo -->
+        <a href="#inicio" class="flex items-center gap-2 z-50">
+          <div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center">
+            <i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
+          </div>
+          <span class="text-lg font-bold text-white nav-logo-text">IEN UNI <span class="text-brand-400">HUB</span></span>
+        </a>
+        <!-- Desktop Menu -->
+        <div class="hidden xl:flex items-center gap-1">
+          <a href="#inicio" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Inicio</a>
+          <a href="#que-es" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">IEN</a>
+          <a href="#biblioteca" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Biblioteca</a>
+          <a href="#solucionarios" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Solucionarios</a>
+          <a href="#examenes" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Exámenes</a>
+          <a href="#simulacros" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Simulacros</a>
+          <a href="#temario" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Temario IEN</a>
+          <a href="#cronograma" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Cronograma</a>
+          <a href="#vacantes" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Vacantes</a>
+          <a href="#herramientas" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Herramientas</a>
+          <a href="#comunidad" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Comunidad</a>
+          <a href="#nosotros" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Nosotros</a>
+          <a href="#contacto" class="nav-link text-sm font-medium text-white/80 hover:text-white px-3 py-2 transition-colors">Contacto</a>
+        </div>
+        <!-- CTA + Hamburger -->
+        <div class="flex items-center gap-3">
+          <a href="https://wa.me/51999999999" target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all hover:shadow-lg hover:shadow-green-500/25">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+          </a>
+          <button id="menuBtn" class="xl:hidden z-50 w-10 h-10 flex items-center justify-center text-white" aria-label="Menú">
+            <i data-lucide="menu" class="w-6 h-6" id="menuIcon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-dark-900/98 backdrop-blur-xl xl:hidden flex flex-col pt-24 px-6 pb-8 overflow-y-auto">
+      <div class="flex flex-col gap-1">
+        <a href="#inicio" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Inicio</a>
+        <a href="#que-es" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">IEN</a>
+        <a href="#biblioteca" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Biblioteca</a>
+        <a href="#solucionarios" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Solucionarios</a>
+        <a href="#examenes" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Exámenes</a>
+        <a href="#simulacros" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Simulacros</a>
+        <a href="#temario" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Temario IEN</a>
+        <a href="#cronograma" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Cronograma</a>
+        <a href="#vacantes" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Vacantes</a>
+        <a href="#herramientas" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Herramientas</a>
+        <a href="#comunidad" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Comunidad</a>
+        <a href="#nosotros" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Nosotros</a>
+        <a href="#contacto" class="mobile-link text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 px-4 py-3 rounded-lg transition-colors">Contacto</a>
+      </div>
+      <a href="https://wa.me/51999999999" target="_blank" class="mt-6 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white text-base font-semibold px-6 py-3.5 rounded-full transition-all">
+        <i data-lucide="message-circle" class="w-5 h-5"></i> Únete al Canal de WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================== HERO ============================== -->
+  <section id="inicio" class="geo-bg relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-20 right-10 w-72 h-72 bg-brand-600/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 left-1/4 w-2 h-2 bg-brand-400 rounded-full animate-float"></div>
+    <div class="absolute top-1/2 right-1/3 w-3 h-3 bg-brand-300/50 rounded-full animate-float" style="animation-delay:1s"></div>
+    <div class="absolute bottom-1/3 left-1/2 w-2 h-2 bg-brand-500/40 rounded-full animate-float" style="animation-delay:2s"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10 text-center">
+      <div class="animate-fade-in-up">
+        <div class="inline-flex items-center gap-2 bg-brand-600/20 border border-brand-500/30 text-brand-300 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full mb-8">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          INGRESO ESCOLAR NACIONAL — UNI 2025
+        </div>
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.95] tracking-tight animate-fade-in-up" style="animation-delay:0.15s">
+        INGRESA A LA<br>UNI POR <span class="gradient-text">IEN</span>
+      </h1>
+      <p class="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay:0.3s">
+        La plataforma gratuita creada para estudiantes de quinto de secundaria que desean ingresar a la Universidad Nacional de Ingeniería mediante el Ingreso Escolar Nacional (IEN). Encuentra solucionarios, material ordenado, exámenes, cronogramas, simulacros y recursos actualizados en un solo lugar.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style="animation-delay:0.45s">
+        <a href="#biblioteca" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-8 py-4 rounded-full transition-all hover:shadow-xl hover:shadow-brand-600/30 text-base">
+          <i data-lucide="book-open" class="w-5 h-5"></i> Explorar Biblioteca
+        </a>
+        <a href="#solucionarios" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white font-semibold px-8 py-4 rounded-full transition-all border border-white/20 text-base backdrop-blur-sm">
+          <i data-lucide="play-circle" class="w-5 h-5"></i> Ver Solucionarios
+        </a>
+      </div>
+      <!-- Scroll indicator -->
+      <div class="mt-16 animate-fade-in" style="animation-delay:0.7s">
+        <a href="#stats" class="inline-flex flex-col items-center gap-2 text-slate-500 hover:text-brand-400 transition-colors">
+          <span class="text-xs font-medium tracking-widest uppercase">Descubre más</span>
+          <i data-lucide="chevron-down" class="w-5 h-5 animate-bounce"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== STATS ============================== -->
+  <section id="stats" class="relative bg-white py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+        <!-- EDITAR: Cambiar los números y textos de las estadísticas -->
+        <div class="reveal card-hover bg-brand-50 border border-brand-100 rounded-2xl p-6 text-center">
+          <div class="text-3xl lg:text-4xl font-black text-brand-700" data-count="78">0</div>
+          <div class="text-xs lg:text-sm font-medium text-brand-600/70 mt-1">+ Miembros</div>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-brand-50 border border-brand-100 rounded-2xl p-6 text-center">
+          <div class="text-3xl lg:text-4xl font-black text-brand-700" data-count="12">0</div>
+          <div class="text-xs lg:text-sm font-medium text-brand-600/70 mt-1">Administradores</div>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-brand-50 border border-brand-100 rounded-2xl p-6 text-center">
+          <div class="text-3xl lg:text-4xl font-black text-brand-700" data-count="100">0</div>
+          <div class="text-xs lg:text-sm font-medium text-brand-600/70 mt-1">+ Solucionarios</div>
+        </div>
+        <div class="reveal reveal-delay-3 card-hover bg-brand-50 border border-brand-100 rounded-2xl p-6 text-center">
+          <div class="text-3xl lg:text-4xl font-black text-brand-700" data-count="500">0</div>
+          <div class="text-xs lg:text-sm font-medium text-brand-600/70 mt-1">+ Archivos</div>
+        </div>
+        <div class="reveal reveal-delay-4 card-hover bg-green-50 border border-green-100 rounded-2xl p-6 text-center col-span-2 md:col-span-1">
+          <div class="text-3xl lg:text-4xl font-black text-green-600">100%</div>
+          <div class="text-xs lg:text-sm font-medium text-green-600/70 mt-1">Gratuito</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== ¿QUÉ ES EL IEN? ============================== -->
+  <section id="que-es" class="geo-bg-light py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Conoce el proceso</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">¿Qué es el <span class="gradient-text">IEN</span>?</h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Todo lo que necesitas saber sobre el Ingreso Escolar Nacional de la Universidad Nacional de Ingeniería.</p>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <!-- EDITAR: Actualizar la información de cada tarjeta -->
+        <div class="reveal card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+            <i data-lucide="info" class="w-6 h-6 text-brand-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-dark-900 mb-2">¿Qué es el IEN?</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">El Ingreso Escolar Nacional (IEN) es una modalidad de ingreso a la UNI dirigida exclusivamente a estudiantes del último año de educación secundaria de colegios públicos y privados de todo el Perú. Se basa en una evaluación de conocimientos y aptitudes.</p>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+            <i data-lucide="users" class="w-6 h-6 text-brand-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-dark-900 mb-2">¿Quiénes pueden postular?</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Estudiantes de 5º año de secundaria de colegios nacionales o particulares, que estén cursando o hayan concluido el año lectivo al momento de la inscripción. No hay límite de edad dentro del rango escolar.</p>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+            <i data-lucide="clipboard-check" class="w-6 h-6 text-brand-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-dark-900 mb-2">¿Cuáles son los requisitos?</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Estar matriculado en 5º de secundaria, contar con DNI, llenar la ficha de inscripción en la página de la UNI, pagar el derecho de examen (según corresponda) y presentarse el día del examen con los documentos requeridos.</p>
+        </div>
+        <div class="reveal card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-5">
+            <i data-lucide="trophy" class="w-6 h-6 text-green-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-dark-900 mb-2">¿Cuáles son las ventajas?</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Compites solo con estudiantes de tu mismo nivel (5º de secundaria), no con egresados ni personas que ya rindieron otros exámenes. Las vacantes son específicas y el nivel del examen es adecuado para tu etapa formativa.</p>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+            <i data-lucide="target" class="w-6 h-6 text-brand-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-dark-900 mb-2">¿Cómo prepararse?</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Estudia los cursos del temario oficial: Aptitud Académica, Matemática, Física, Química, Humanidades y Actualidad. Usa nuestros solucionarios, toma simulacros, revisa exámenes anteriores y sigue un plan de estudio constante.</p>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-5">
+            <i data-lucide="calendar-days" class="w-6 h-6 text-purple-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-dark-900 mb-2">¿Cuándo es el examen?</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">El examen IEN generalmente se realiza entre octubre y noviembre de cada año. Las inscripciones inician semanas antes. Revisa nuestro cronograma para fechas exactas actualizadas del proceso actual.</p>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="reveal">
+        <h3 class="text-2xl lg:text-3xl font-bold text-dark-900 text-center mb-12">Etapas del Proceso IEN</h3>
+        <!-- EDITAR: Actualizar las fechas y descripciones de la línea de tiempo -->
+        <div class="relative max-w-4xl mx-auto">
+          <div class="timeline-line"></div>
+          <!-- Step 1 -->
+          <div class="relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-8 mb-12">
+            <div class="timeline-dot top-1"></div>
+            <div class="md:text-right md:pr-12">
+              <span class="inline-block text-xs font-bold text-brand-600 bg-brand-100 px-3 py-1 rounded-full mb-2">ETAPA 1</span>
+              <h4 class="font-bold text-dark-900">Publicación de Bases</h4>
+              <p class="text-sm text-slate-500 mt-1">La UNI publica las bases del concurso de admisión IEN con todos los detalles del proceso.</p>
+            </div>
+            <div class="hidden md:flex items-center">
+              <span class="text-sm font-semibold text-brand-600">Septiembre 2025</span>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div class="relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-8 mb-12">
+            <div class="timeline-dot top-1"></div>
+            <div class="hidden md:flex items-center justify-end">
+              <span class="text-sm font-semibold text-brand-600">Septiembre – Octubre 2025</span>
+            </div>
+            <div class="md:pl-12">
+              <span class="inline-block text-xs font-bold text-brand-600 bg-brand-100 px-3 py-1 rounded-full mb-2">ETAPA 2</span>
+              <h4 class="font-bold text-dark-900">Inscripciones</h4>
+              <p class="text-sm text-slate-500 mt-1">Los postulantes completan su inscripción online a través de la página oficial de la UNI.</p>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-8 mb-12">
+            <div class="timeline-dot top-1"></div>
+            <div class="md:text-right md:pr-12">
+              <span class="inline-block text-xs font-bold text-brand-600 bg-brand-100 px-3 py-1 rounded-full mb-2">ETAPA 3</span>
+              <h4 class="font-bold text-dark-900">Examen de Admisión</h4>
+              <p class="text-sm text-slate-500 mt-1">Aplicación del examen oficial en la sede de la UNI. Se evalúan todas las áreas del temario.</p>
+            </div>
+            <div class="hidden md:flex items-center">
+              <span class="text-sm font-semibold text-brand-600">Noviembre 2025</span>
+            </div>
+          </div>
+          <!-- Step 4 -->
+          <div class="relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-8 mb-12">
+            <div class="timeline-dot top-1"></div>
+            <div class="hidden md:flex items-center justify-end">
+              <span class="text-sm font-semibold text-brand-600">Noviembre – Diciembre 2025</span>
+            </div>
+            <div class="md:pl-12">
+              <span class="inline-block text-xs font-bold text-brand-600 bg-brand-100 px-3 py-1 rounded-full mb-2">ETAPA 4</span>
+              <h4 class="font-bold text-dark-900">Publicación de Resultados</h4>
+              <p class="text-sm text-slate-500 mt-1">Se publican los resultados en la página de la UNI. Los ingresantes realizan los trámites de matrícula.</p>
+            </div>
+          </div>
+          <!-- Step 5 -->
+          <div class="relative pl-16 md:pl-0 md:grid md:grid-cols-2 md:gap-8">
+            <div class="timeline-dot top-1"></div>
+            <div class="md:text-right md:pr-12">
+              <span class="inline-block text-xs font-bold text-green-600 bg-green-100 px-3 py-1 rounded-full mb-2">ETAPA FINAL</span>
+              <h4 class="font-bold text-dark-900">Matrícula e Inicio de Clases</h4>
+              <p class="text-sm text-slate-500 mt-1">Los ingresados completan su matrícula e inician el primer ciclo de estudios en la UNI.</p>
+            </div>
+            <div class="hidden md:flex items-center">
+              <span class="text-sm font-semibold text-green-600">Marzo 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== TEMARIO IEN ============================== -->
+  <section id="temario" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Contenido completo</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Temario <span class="gradient-text">IEN</span></h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Todos los cursos que se evalúan en el examen IEN, organizados por área tal como los estudia un postulante.</p>
+      </div>
+
+      <!-- Aptitud Académica -->
+      <div class="mb-12 reveal">
+        <h3 class="text-xl font-bold text-dark-900 mb-4 flex items-center gap-2"><i data-lucide="brain" class="w-5 h-5 text-brand-600"></i> Aptitud Académica</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-sm">RA</div>
+              <span class="font-semibold text-dark-900 text-sm">Razonamiento Matemático</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-sm">RV</div>
+              <span class="font-semibold text-dark-900 text-sm">Razonamiento Verbal</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matemática -->
+      <div class="mb-12 reveal">
+        <h3 class="text-xl font-bold text-dark-900 mb-4 flex items-center gap-2"><i data-lucide="calculator" class="w-5 h-5 text-brand-600"></i> Matemática</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">AR</div>
+              <span class="font-semibold text-dark-900 text-sm">Aritmética</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">AL</div>
+              <span class="font-semibold text-dark-900 text-sm">Álgebra</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">GE</div>
+              <span class="font-semibold text-dark-900 text-sm">Geometría</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">TR</div>
+              <span class="font-semibold text-dark-900 text-sm">Trigonometría</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ciencias -->
+      <div class="mb-12 reveal">
+        <h3 class="text-xl font-bold text-dark-900 mb-4 flex items-center gap-2"><i data-lucide="flask-conical" class="w-5 h-5 text-brand-600"></i> Ciencias</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold text-sm">FI</div>
+              <span class="font-semibold text-dark-900 text-sm">Física</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold text-sm">QU</div>
+              <span class="font-semibold text-dark-900 text-sm">Química</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Humanidades -->
+      <div class="reveal">
+        <h3 class="text-xl font-bold text-dark-900 mb-4 flex items-center gap-2"><i data-lucide="book-open" class="w-5 h-5 text-brand-600"></i> Humanidades</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">HP</div>
+              <span class="font-semibold text-dark-900 text-sm">Historia del Perú</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">HU</div>
+              <span class="font-semibold text-dark-900 text-sm">Historia Universal</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">GG</div>
+              <span class="font-semibold text-dark-900 text-sm">Geografía</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">EC</div>
+              <span class="font-semibold text-dark-900 text-sm">Economía</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">FI</div>
+              <span class="font-semibold text-dark-900 text-sm">Filosofía</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">PS</div>
+              <span class="font-semibold text-dark-900 text-sm">Psicología</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">ED</div>
+              <span class="font-semibold text-dark-900 text-sm">Educación Cívica</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+          <div class="card-hover bg-slate-50 border border-slate-100 rounded-xl p-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-sm">AC</div>
+              <span class="font-semibold text-dark-900 text-sm">Actualidad</span>
+            </div>
+            <a href="#" class="text-brand-600 hover:text-brand-800 transition-colors"><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== SOLUCIONARIOS ============================== -->
+  <section id="solucionarios" class="geo-bg py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-300 bg-brand-600/20 px-4 py-2 rounded-full mb-4">Sección principal</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">Solucionarios <span class="text-brand-400">IEN</span></h2>
+        <p class="mt-4 text-slate-400 max-w-2xl mx-auto">Videos resueltos de todas las semanas, organizados por curso, profesor y academia.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2 mb-8 reveal justify-center">
+        <button class="sol-filter active-filter bg-brand-600 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="all">Todos</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="aritmetica">Aritmética</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="algebra">Álgebra</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="geometria">Geometría</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="fisica">Física</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="quimica">Química</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="rm">R. Matemático</button>
+        <button class="sol-filter bg-white/10 text-white/70 hover:bg-white/15 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="rv">R. Verbal</button>
+      </div>
+
+      <!-- EDITAR: Agregar o modificar los solucionarios. Cambiar data-course, thumbnail, título, descripción y link de YouTube -->
+      <div id="solGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="aritmetica">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-arit-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 1</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Aritmética — Semana 1</h4>
+            <p class="text-xs text-slate-400 mb-3">Operaciones combinadas, MCM y MCD, fracciones.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="algebra">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-alg-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 1</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Álgebra — Semana 1</h4>
+            <p class="text-xs text-slate-400 mb-3">Productoria, sumatoria, leyes de exponentes.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="geometria">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-geo-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 2</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Geometría — Semana 2</h4>
+            <p class="text-xs text-slate-400 mb-3">Ángulos, triángulos, teorema de Pitágoras.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="fisica">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-fis-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 1</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Física — Semana 1</h4>
+            <p class="text-xs text-slate-400 mb-3">Cinemática, MRU, MRUV, caída libre.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="quimica">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-qui-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 2</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Química — Semana 2</h4>
+            <p class="text-xs text-slate-400 mb-3">Tabla periódica, enlaces químicos, mol.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="rm">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-rm-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 3</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Razonamiento Matemático — Semana 3</h4>
+            <p class="text-xs text-slate-400 mb-3">Sucesiones, series, patrones numéricos.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="rv">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-rv-1/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 3</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Razonamiento Verbal — Semana 3</h4>
+            <p class="text-xs text-slate-400 mb-3">Analogías, sinónimos, antónimos, comprensión lectora.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sol-card card-hover bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden" data-course="aritmetica">
+          <div class="aspect-video bg-dark-800 relative overflow-hidden">
+            <img src="https://picsum.photos/seed/sol-arit-2/400/225.jpg" alt="Solucionario" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+              <i data-lucide="play-circle" class="w-12 h-12 text-white/80"></i>
+            </div>
+            <span class="absolute top-3 left-3 bg-brand-600 text-white text-[10px] font-bold px-2 py-1 rounded">Semana 2</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-semibold text-white text-sm mb-1">Aritmética — Semana 2</h4>
+            <p class="text-xs text-slate-400 mb-3">Porcentajes, regla de tres, interés simple y compuesto.</p>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] text-brand-400 font-medium">CEPREUNI 2025</span>
+              <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-1 text-[10px] font-semibold text-red-400 hover:text-red-300 transition-colors">
+                Ver en YouTube <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-10 reveal">
+        <a href="https://youtube.com" target="_blank" class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-8 py-3.5 rounded-full transition-all hover:shadow-lg hover:shadow-red-600/30">
+          <i data-lucide="youtube" class="w-5 h-5"></i> Ver todos en YouTube
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== BIBLIOTECA ============================== -->
+  <section id="biblioteca" class="geo-bg-light py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Recurso central</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Biblioteca <span class="gradient-text">IEN</span></h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Todo el material organizado por carpetas. Accede a PDFs, separatas, libros, resúmenes y más.</p>
+      </div>
+      <!-- EDITAR: Cambiar los enlaces de Google Drive, iconos y descripciones de cada carpeta -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <a href="https://drive.google.com" target="_blank" class="reveal card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-red-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="file-text" class="w-7 h-7 text-red-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">PDFs</h4>
+          <p class="text-xs text-slate-400 mt-1">Documentos y guías en formato PDF.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-1 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="newspaper" class="w-7 h-7 text-blue-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Boletines</h4>
+          <p class="text-xs text-slate-400 mt-1">Boletines de CEPREUNI y academias.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-2 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="notebook-pen" class="w-7 h-7 text-green-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Separatas</h4>
+          <p class="text-xs text-slate-400 mt-1">Separatas de cada curso por semana.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-3 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="file-spreadsheet" class="w-7 h-7 text-purple-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Formularios</h4>
+          <p class="text-xs text-slate-400 mt-1">Formularios de práctica por curso.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="book-copy" class="w-7 h-7 text-amber-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Libros</h4>
+          <p class="text-xs text-slate-400 mt-1">Libros recomendados para cada curso.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-1 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-brand-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="school" class="w-7 h-7 text-brand-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Material CEPREUNI</h4>
+          <p class="text-xs text-slate-400 mt-1">Material oficial del CEPREUNI.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-2 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="folder-open" class="w-7 h-7 text-cyan-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Material IEN</h4>
+          <p class="text-xs text-slate-400 mt-1">Material específico del proceso IEN.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-3 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center">
+          <div class="w-14 h-14 rounded-2xl bg-pink-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="sticky-note" class="w-7 h-7 text-pink-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Resúmenes</h4>
+          <p class="text-xs text-slate-400 mt-1">Resúmenes rápidos para repasar.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm group text-center sm:col-span-2 lg:col-span-4 max-w-xs mx-auto lg:max-w-none w-full">
+          <div class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i data-lucide="database" class="w-7 h-7 text-slate-600"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Bancos de Preguntas</h4>
+          <p class="text-xs text-slate-400 mt-1">Bancos completos de preguntas por curso y año.</p>
+          <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 mt-3">Abrir carpeta <i data-lucide="external-link" class="w-3 h-3"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== EXÁMENES ============================== -->
+  <section id="examenes" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Practica real</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Exámenes <span class="gradient-text">IEN</span></h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Descarga exámenes anteriores, simulacros y exámenes resueltos en PDF.</p>
+      </div>
+      <!-- EDITAR: Agregar más exámenes con sus enlaces de descarga -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="reveal card-hover bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center"><i data-lucide="file-check" class="w-5 h-5 text-brand-600"></i></div>
+            <span class="text-[10px] font-bold text-brand-600 bg-brand-100 px-2 py-1 rounded-full">EXAMEN IEN</span>
+          </div>
+          <h4 class="font-bold text-dark-900 mb-1">Examen IEN 2024</h4>
+          <p class="text-xs text-slate-500 mb-4">Examen completo del proceso IEN 2024 con todas las secciones.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+          </a>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center"><i data-lucide="file-check" class="w-5 h-5 text-brand-600"></i></div>
+            <span class="text-[10px] font-bold text-brand-600 bg-brand-100 px-2 py-1 rounded-full">EXAMEN IEN</span>
+          </div>
+          <h4 class="font-bold text-dark-900 mb-1">Examen IEN 2023</h4>
+          <p class="text-xs text-slate-500 mb-4">Examen completo del proceso IEN 2023 con todas las secciones.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+          </a>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center"><i data-lucide="file-check-2" class="w-5 h-5 text-green-600"></i></div>
+            <span class="text-[10px] font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">RESUELTO</span>
+          </div>
+          <h4 class="font-bold text-dark-900 mb-1">Examen IEN 2024 Resuelto</h4>
+          <p class="text-xs text-slate-500 mb-4">Examen IEN 2024 con respuestas y procedimiento detallado.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+          </a>
+        </div>
+        <div class="reveal card-hover bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center"><i data-lucide="school" class="w-5 h-5 text-purple-600"></i></div>
+            <span class="text-[10px] font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">CEPREUNI</span>
+          </div>
+          <h4 class="font-bold text-dark-900 mb-1">Exámenes CEPREUNI</h4>
+          <p class="text-xs text-slate-500 mb-4">Colección de exámenes de las pruebas calificadas del CEPREUNI.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+          </a>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center"><i data-lucide="building-2" class="w-5 h-5 text-amber-600"></i></div>
+            <span class="text-[10px] font-bold text-amber-600 bg-amber-100 px-2 py-1 rounded-full">UNI</span>
+          </div>
+          <h4 class="font-bold text-dark-900 mb-1">Exámenes UNI (Ordinario)</h4>
+          <p class="text-xs text-slate-500 mb-4">Exámenes del proceso ordinario de admisión para referencia y práctica.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+          </a>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center"><i data-lucide="timer" class="w-5 h-5 text-cyan-600"></i></div>
+            <span class="text-[10px] font-bold text-cyan-600 bg-cyan-100 px-2 py-1 rounded-full">SIMULACRO</span>
+          </div>
+          <h4 class="font-bold text-dark-900 mb-1">Simulacros en PDF</h4>
+          <p class="text-xs text-slate-500 mb-4">Simulacros creados por la comunidad con nivel IEN real.</p>
+          <a href="#" class="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== SIMULACROS ============================== -->
+  <section id="simulacros" class="geo-bg py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-300 bg-brand-600/20 px-4 py-2 rounded-full mb-4">Próximamente</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">Simulacros <span class="text-brand-400">en Línea</span></h2>
+        <p class="mt-4 text-slate-400 max-w-2xl mx-auto">Pronto podrás rendir simulacros completos con cronómetro, calificación automática y ranking.</p>
+      </div>
+
+      <div class="max-w-lg mx-auto reveal">
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 text-center">
+          <!-- Circle Timer Display -->
+          <div class="relative w-48 h-48 mx-auto mb-8">
+            <svg class="w-full h-full -rotate-90" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="none"/>
+              <circle id="simulRing" cx="100" cy="100" r="90" stroke="#3B82F6" stroke-width="6" fill="none"
+                stroke-dasharray="565.48" stroke-dashoffset="0" stroke-linecap="round" class="pomodoro-ring"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span id="simulTimer" class="text-4xl font-black text-white font-mono">03:00:00</span>
+              <span class="text-xs text-slate-400 mt-1">Tiempo restante</span>
+            </div>
+          </div>
+          <!-- Info Grid -->
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="bg-white/5 rounded-xl p-3">
+              <div class="text-2xl font-black text-brand-400">60</div>
+              <div class="text-[10px] text-slate-400 font-medium">Preguntas</div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3">
+              <div class="text-2xl font-black text-brand-400">1000</div>
+              <div class="text-[10px] text-slate-400 font-medium">Puntaje máx.</div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3">
+              <div class="text-2xl font-black text-brand-400">IEN</div>
+              <div class="text-[10px] text-slate-400 font-medium">Nivel</div>
+            </div>
+            <div class="bg-white/5 rounded-xl p-3">
+              <div class="text-2xl font-black text-amber-400">SOON</div>
+              <div class="text-[10px] text-slate-400 font-medium">Estado</div>
+            </div>
+          </div>
+          <button id="simulBtn" disabled class="w-full bg-brand-600/30 text-white/50 font-semibold px-8 py-4 rounded-full cursor-not-allowed text-sm flex items-center justify-center gap-2">
+            <i data-lucide="lock" class="w-5 h-5"></i> Simulacro disponible pronto
+          </button>
+          <p class="text-xs text-slate-500 mt-4">Estamos construyendo la plataforma de simulacros. ¡Muy pronto!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== CRONOGRAMA ============================== -->
+  <section id="cronograma" class="geo-bg-light py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Fechas importantes</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Cronograma <span class="gradient-text">2025</span></h2>
+      </div>
+
+      <!-- Countdown -->
+      <div class="reveal max-w-2xl mx-auto mb-16">
+        <div class="bg-dark-900 rounded-3xl p-8 text-center">
+          <p class="text-sm text-slate-400 mb-2">Contador regresivo para el próximo evento</p>
+          <!-- EDITAR: Cambiar la fecha del contador regresivo -->
+          <h3 class="text-lg font-bold text-white mb-6">Examen IEN 2025</h3>
+          <div class="grid grid-cols-4 gap-3">
+            <div class="bg-white/5 rounded-2xl p-4">
+              <div id="countDays" class="text-3xl lg:text-4xl font-black text-brand-400">--</div>
+              <div class="text-[10px] text-slate-500 mt-1 font-medium">Días</div>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-4">
+              <div id="countHours" class="text-3xl lg:text-4xl font-black text-brand-400">--</div>
+              <div class="text-[10px] text-slate-500 mt-1 font-medium">Horas</div>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-4">
+              <div id="countMins" class="text-3xl lg:text-4xl font-black text-brand-400">--</div>
+              <div class="text-[10px] text-slate-500 mt-1 font-medium">Minutos</div>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-4">
+              <div id="countSecs" class="text-3xl lg:text-4xl font-black text-brand-400">--</div>
+              <div class="text-[10px] text-slate-500 mt-1 font-medium">Segundos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <!-- EDITAR: Actualizar las fechas y eventos del cronograma -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="reveal card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-brand-100 rounded-xl p-3 text-center min-w-[56px]">
+              <div class="text-lg font-black text-brand-700">15</div>
+              <div class="text-[10px] font-bold text-brand-500 uppercase">Sep</div>
+            </div>
+            <div>
+              <h4 class="font-bold text-dark-900 text-sm">Publicación de Bases IEN</h4>
+              <p class="text-xs text-slate-500 mt-1">La UNI publica las bases oficiales del proceso IEN 2025.</p>
+              <span class="inline-block text-[10px] font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded mt-2">Confirmado</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-brand-100 rounded-xl p-3 text-center min-w-[56px]">
+              <div class="text-lg font-black text-brand-700">01</div>
+              <div class="text-[10px] font-bold text-brand-500 uppercase">Oct</div>
+            </div>
+            <div>
+              <h4 class="font-bold text-dark-900 text-sm">Inicio de Inscripciones</h4>
+              <p class="text-xs text-slate-500 mt-1">Período de inscripción para postulantes al IEN.</p>
+              <span class="inline-block text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded mt-2">Pendiente</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-brand-100 rounded-xl p-3 text-center min-w-[56px]">
+              <div class="text-lg font-black text-brand-700">15</div>
+              <div class="text-[10px] font-bold text-brand-500 uppercase">Oct</div>
+            </div>
+            <div>
+              <h4 class="font-bold text-dark-900 text-sm">Cierre de Inscripciones</h4>
+              <p class="text-xs text-slate-500 mt-1">Fecha límite para completar la inscripción online.</p>
+              <span class="inline-block text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded mt-2">Pendiente</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-red-100 rounded-xl p-3 text-center min-w-[56px]">
+              <div class="text-lg font-black text-red-700">10</div>
+              <div class="text-[10px] font-bold text-red-500 uppercase">Nov</div>
+            </div>
+            <div>
+              <h4 class="font-bold text-dark-900 text-sm">Examen IEN 2025</h4>
+              <p class="text-xs text-slate-500 mt-1">Fecha del examen de admisión en la sede de la UNI.</p>
+              <span class="inline-block text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded mt-2">Pendiente</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-1 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-green-100 rounded-xl p-3 text-center min-w-[56px]">
+              <div class="text-lg font-black text-green-700">25</div>
+              <div class="text-[10px] font-bold text-green-500 uppercase">Nov</div>
+            </div>
+            <div>
+              <h4 class="font-bold text-dark-900 text-sm">Publicación de Resultados</h4>
+              <p class="text-xs text-slate-500 mt-1">Resultados del examen IEN en la página de la UNI.</p>
+              <span class="inline-block text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded mt-2">Pendiente</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2 card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="bg-purple-100 rounded-xl p-3 text-center min-w-[56px]">
+              <div class="text-lg font-black text-purple-700">02</div>
+              <div class="text-[10px] font-bold text-purple-500 uppercase">Mar</div>
+            </div>
+            <div>
+              <h4 class="font-bold text-dark-900 text-sm">Matrícula 2026-I</h4>
+              <p class="text-xs text-slate-500 mt-1">Inicio de matrícula para ingresantes por IEN.</p>
+              <span class="inline-block text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded mt-2">Pendiente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== VACANTES ============================== -->
+  <section id="vacantes" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Información oficial</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Vacantes <span class="gradient-text">IEN</span></h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Consulta las vacantes disponibles por especialidad en el proceso IEN.</p>
+      </div>
+
+      <!-- Filter -->
+      <div class="flex flex-wrap gap-2 mb-6 reveal justify-center">
+        <button class="vac-filter active-filter bg-brand-600 text-white text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="all">Todas</button>
+        <button class="vac-filter bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="ingenieria">Ingeniería</button>
+        <button class="vac-filter bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-semibold px-4 py-2 rounded-full transition-all" data-filter="ciencias">Ciencias</button>
+      </div>
+
+      <!-- EDITAR: Actualizar la tabla de vacantes con datos oficiales -->
+      <div class="reveal overflow-x-auto">
+        <table class="w-full min-w-[640px]">
+          <thead>
+            <tr class="border-b-2 border-brand-100">
+              <th class="text-left py-4 px-4 text-xs font-bold text-brand-700 uppercase tracking-wider">Especialidad</th>
+              <th class="text-center py-4 px-4 text-xs font-bold text-brand-700 uppercase tracking-wider">Vacantes IEN</th>
+              <th class="text-center py-4 px-4 text-xs font-bold text-brand-700 uppercase tracking-wider">Corte Anterior</th>
+              <th class="text-center py-4 px-4 text-xs font-bold text-brand-700 uppercase tracking-wider">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="vacTable">
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ingenieria">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Ingeniería de Sistemas</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ingenieria">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Ingeniería Electrónica</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ingenieria">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Ingeniería Civil</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ingenieria">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Ingeniería Industrial</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ingenieria">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Ingeniería Mecánica</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ingenieria">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Ingeniería Eléctrica</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ciencias">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Estadística</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ciencias">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Física</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row border-b border-slate-100 hover:bg-brand-50/50 transition-colors" data-cat="ciencias">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Matemática</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+            <tr class="vac-row hover:bg-brand-50/50 transition-colors" data-cat="ciencias">
+              <td class="py-3.5 px-4 text-sm font-medium text-dark-900">Química</td>
+              <td class="py-3.5 px-4 text-sm text-center text-dark-900">—</td>
+              <td class="py-3.5 px-4 text-sm text-center text-slate-500">—</td>
+              <td class="py-3.5 px-4 text-center"><span class="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">Por publicar</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-400 text-center mt-6">Las vacantes se actualizarán tan pronto se publiquen las bases oficiales de la UNI.</p>
+    </div>
+  </section>
+
+  <!-- ============================== HERRAMIENTAS ============================== -->
+  <section id="herramientas" class="geo-bg-light py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Productividad</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Herramientas <span class="gradient-text">IEN</span></h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Calculadoras, temporizadores y planners diseñados para tu preparación.</p>
+      </div>
+
+      <!-- Tool Tabs -->
+      <div class="flex flex-wrap gap-2 mb-8 reveal justify-center">
+        <button class="tool-tab active-tab text-xs font-semibold px-5 py-2.5 rounded-full transition-all border border-slate-200" data-tool="calc-puntaje">Calculadora Puntaje</button>
+        <button class="tool-tab text-xs font-semibold px-5 py-2.5 rounded-full transition-all border border-slate-200 bg-white text-slate-600" data-tool="calc-promedio">Calculadora Promedio</button>
+        <button class="tool-tab text-xs font-semibold px-5 py-2.5 rounded-full transition-all border border-slate-200 bg-white text-slate-600" data-tool="pomodoro">Pomodoro Timer</button>
+        <button class="tool-tab text-xs font-semibold px-5 py-2.5 rounded-full transition-all border border-slate-200 bg-white text-slate-600" data-tool="cronometro">Cronómetro</button>
+        <button class="tool-tab text-xs font-semibold px-5 py-2.5 rounded-full transition-all border border-slate-200 bg-white text-slate-600" data-tool="checklist">Checklist</button>
+      </div>
+
+      <div class="max-w-2xl mx-auto reveal">
+        <!-- Calc Puntaje -->
+        <div id="tool-calc-puntaje" class="tool-panel bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
+          <h3 class="text-lg font-bold text-dark-900 mb-6 flex items-center gap-2"><i data-lucide="calculator" class="w-5 h-5 text-brand-600"></i> Calculadora de Puntaje UNI</h3>
+          <div class="grid grid-cols-2 gap-4 mb-6">
+            <div>
+              <label class="text-xs font-semibold text-slate-500 mb-1 block">Correctas</label>
+              <input type="number" id="calcCorrectas" value="0" min="0" max="60" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-slate-500 mb-1 block">Incorrectas</label>
+              <input type="number" id="calcIncorrectas" value="0" min="0" max="60" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-slate-500 mb-1 block">Blancas</label>
+              <input type="number" id="calcBlancas" value="0" min="0" max="60" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-slate-500 mb-1 block">Total preguntas</label>
+              <input type="number" id="calcTotal" value="60" min="1" max="100" class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+            </div>
+          </div>
+          <button onclick="calcularPuntaje()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl transition-all text-sm">Calcular Puntaje</button>
+          <div id="puntajeResult" class="mt-6 hidden">
+            <div class="bg-brand-50 border border-brand-100 rounded-2xl p-6 text-center">
+              <div class="text-4xl font-black text-brand-700" id="puntajeValor">0</div>
+              <div class="text-sm text-brand-600 font-medium mt-1">Puntaje Estimado</div>
+              <div class="text-xs text-slate-500 mt-2" id="puntajeObs">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calc Promedio -->
+        <div id="tool-calc-promedio" class="tool-panel bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hidden">
+          <h3 class="text-lg font-bold text-dark-900 mb-6 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-600"></i> Calculadora de Promedio</h3>
+          <div id="promInputs" class="space-y-3 mb-6">
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-slate-400 w-16">Nota 1</span>
+              <input type="number" class="prom-note w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" value="" placeholder="0 - 20" min="0" max="20">
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-slate-400 w-16">Nota 2</span>
+              <input type="number" class="prom-note w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" value="" placeholder="0 - 20" min="0" max="20">
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-slate-400 w-16">Nota 3</span>
+              <input type="number" class="prom-note w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" value="" placeholder="0 - 20" min="0" max="20">
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-slate-400 w-16">Nota 4</span>
+              <input type="number" class="prom-note w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" value="" placeholder="0 - 20" min="0" max="20">
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button onclick="calcularPromedio()" class="flex-1 bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 rounded-xl transition-all text-sm">Calcular</button>
+            <button onclick="addNota()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold py-3 px-4 rounded-xl transition-all text-sm">+</button>
+          </div>
+          <div id="promResult" class="mt-6 hidden">
+            <div class="bg-brand-50 border border-brand-100 rounded-2xl p-6 text-center">
+              <div class="text-4xl font-black text-brand-700" id="promValor">0</div>
+              <div class="text-sm text-brand-600 font-medium mt-1">Promedio</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pomodoro -->
+        <div id="tool-pomodoro" class="tool-panel bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hidden">
+          <h3 class="text-lg font-bold text-dark-900 mb-6 flex items-center gap-2"><i data-lucide="clock" class="w-5 h-5 text-brand-600"></i> Pomodoro Timer</h3>
+          <div class="flex gap-2 mb-6 justify-center">
+            <button onclick="setPomodoro(25)" class="pomo-preset text-xs font-semibold px-4 py-2 rounded-full bg-brand-600 text-white transition-all">25 min</button>
+            <button onclick="setPomodoro(45)" class="pomo-preset text-xs font-semibold px-4 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">45 min</button>
+            <button onclick="setPomodoro(5)" class="pomo-preset text-xs font-semibold px-4 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">5 min</button>
+            <button onclick="setPomodoro(10)" class="pomo-preset text-xs font-semibold px-4 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">10 min</button>
+          </div>
+          <div class="relative w-52 h-52 mx-auto mb-6">
+            <svg class="w-full h-full -rotate-90" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90" stroke="#F1F5F9" stroke-width="8" fill="none"/>
+              <circle id="pomoRing" cx="100" cy="100" r="90" stroke="#3B82F6" stroke-width="8" fill="none"
+                stroke-dasharray="565.48" stroke-dashoffset="0" stroke-linecap="round" class="transition-all duration-1000"/>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span id="pomoTimer" class="text-5xl font-black text-dark-900 font-mono">25:00</span>
+              <span class="text-xs text-slate-400 mt-1" id="pomoLabel">Enfoque</span>
+            </div>
+          </div>
+          <div class="flex gap-3 justify-center">
+            <button onclick="startPomodoro()" id="pomoStartBtn" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-8 py-3 rounded-xl transition-all text-sm">Iniciar</button>
+            <button onclick="resetPomodoro()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-6 py-3 rounded-xl transition-all text-sm">Reset</button>
+          </div>
+        </div>
+
+        <!-- Cronómetro -->
+        <div id="tool-cronometro" class="tool-panel bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hidden">
+          <h3 class="text-lg font-bold text-dark-900 mb-6 flex items-center gap-2"><i data-lucide="timer" class="w-5 h-5 text-brand-600"></i> Cronómetro</h3>
+          <div class="text-center mb-8">
+            <div id="cronoDisplay" class="text-6xl font-black text-dark-900 font-mono">00:00.00</div>
+          </div>
+          <div class="flex gap-3 justify-center">
+            <button onclick="startCrono()" id="cronoStartBtn" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-8 py-3 rounded-xl transition-all text-sm">Iniciar</button>
+            <button onclick="pauseCrono()" id="cronoPauseBtn" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3 rounded-xl transition-all text-sm hidden">Pausar</button>
+            <button onclick="resetCrono()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold px-6 py-3 rounded-xl transition-all text-sm">Reset</button>
+            <button onclick="lapCrono()" id="cronoLapBtn" class="bg-brand-100 hover:bg-brand-200 text-brand-700 font-semibold px-6 py-3 rounded-xl transition-all text-sm hidden">Lap</button>
+          </div>
+          <div id="cronoLaps" class="mt-6 space-y-2 max-h-48 overflow-y-auto"></div>
+        </div>
+
+        <!-- Checklist -->
+        <div id="tool-checklist" class="tool-panel bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hidden">
+          <h3 class="text-lg font-bold text-dark-900 mb-6 flex items-center gap-2"><i data-lucide="check-square" class="w-5 h-5 text-brand-600"></i> Checklist de Estudio</h3>
+          <div class="flex gap-2 mb-4">
+            <input type="text" id="checkInput" placeholder="Agregar tarea..." class="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" onkeypress="if(event.key==='Enter')addCheckItem()">
+            <button onclick="addCheckItem()" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-4 py-3 rounded-xl transition-all"><i data-lucide="plus" class="w-4 h-4"></i></button>
+          </div>
+          <div id="checkList" class="space-y-2 max-h-80 overflow-y-auto">
+            <!-- EDITAR: Agregar tareas por defecto si se desea -->
+          </div>
+          <div class="mt-4 flex items-center justify-between text-xs text-slate-400">
+            <span id="checkCount">0 tareas</span>
+            <button onclick="clearChecks()" class="text-red-500 hover:text-red-600 font-semibold transition-colors">Limpiar todo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== COMUNIDAD ============================== -->
+  <section id="comunidad" class="bg-white py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Únete</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Nuestra <span class="gradient-text">Comunidad</span></h2>
+        <p class="mt-4 text-slate-500 max-w-2xl mx-auto">Sigue todas nuestras redes y forma parte de la comunidad IEN más grande.</p>
+      </div>
+      <!-- EDITAR: Cambiar los enlaces de cada red social -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <a href="https://wa.me/51999999999" target="_blank" class="reveal card-hover bg-green-50 border border-green-100 rounded-2xl p-6 text-center group">
+          <div class="w-14 h-14 rounded-2xl bg-green-500 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="message-circle" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">WhatsApp</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Canal principal</p>
+        </a>
+        <a href="https://youtube.com" target="_blank" class="reveal reveal-delay-1 card-hover bg-red-50 border border-red-100 rounded-2xl p-6 text-center group">
+          <div class="w-14 h-14 rounded-2xl bg-red-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="youtube" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">YouTube</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Solucionarios</p>
+        </a>
+        <a href="https://drive.google.com" target="_blank" class="reveal reveal-delay-2 card-hover bg-blue-50 border border-blue-100 rounded-2xl p-6 text-center group">
+          <div class="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="hard-drive" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Google Drive</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Biblioteca</p>
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="reveal reveal-delay-3 card-hover bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center group">
+          <div class="w-14 h-14 rounded-2xl bg-dark-900 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="music" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">TikTok</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Tips rápidos</p>
+        </a>
+        <a href="https://t.me/" target="_blank" class="reveal card-hover bg-sky-50 border border-sky-100 rounded-2xl p-6 text-center group">
+          <div class="w-14 h-14 rounded-2xl bg-sky-500 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="send" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Telegram</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Canal de alertas</p>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="reveal reveal-delay-1 card-hover bg-pink-50 border border-pink-100 rounded-2xl p-6 text-center group">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="instagram" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Instagram</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Contenido visual</p>
+        </a>
+        <a href="https://discord.gg/" target="_blank" class="reveal reveal-delay-2 card-hover bg-indigo-50 border border-indigo-100 rounded-2xl p-6 text-center group col-span-2 md:col-span-2">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+            <i data-lucide="gamepad-2" class="w-7 h-7 text-white"></i>
+          </div>
+          <h4 class="font-bold text-dark-900 text-sm">Discord</h4>
+          <p class="text-[10px] text-slate-400 mt-1">Servidor de la comunidad — estudia en grupo, resuelve dudas y conoce a otros postulantes</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== NOSOTROS ============================== -->
+  <section id="nosotros" class="geo-bg py-20 lg:py-28">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-300 bg-brand-600/20 px-4 py-2 rounded-full mb-4">Quiénes somos</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-8">Sobre <span class="text-brand-400">Nosotros</span></h2>
+        <!-- EDITAR: Actualizar el texto de "Nosotros" -->
+        <p class="text-slate-300 leading-relaxed text-base lg:text-lg mb-6">
+          Somos una comunidad gratuita creada por estudiantes apasionados por ayudar a futuros postulantes a la Universidad Nacional de Ingeniería.
+        </p>
+        <p class="text-slate-400 leading-relaxed text-sm lg:text-base mb-6">
+          Nuestro objetivo es convertirnos en la plataforma de referencia para el Ingreso Escolar Nacional (IEN), reuniendo material de calidad, solucionarios, recursos y herramientas para que cualquier estudiante pueda prepararse de forma organizada y gratuita.
+        </p>
+        <p class="text-slate-400 leading-relaxed text-sm lg:text-base">
+          Actualmente contamos con una comunidad en crecimiento y un equipo de administradores comprometidos con compartir contenido útil y actualizado.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-3 gap-4 reveal">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-2xl font-black text-brand-400">100%</div>
+          <div class="text-xs text-slate-400 mt-1">Gratuito</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-2xl font-black text-brand-400">IEN</div>
+          <div class="text-xs text-slate-400 mt-1">Especializados</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-2xl font-black text-brand-400">24/7</div>
+          <div class="text-xs text-slate-400 mt-1">Disponible</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== FAQ ============================== -->
+  <section id="faq" class="bg-white py-20 lg:py-28">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Resuelve tus dudas</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dark-900 tracking-tight">Preguntas <span class="gradient-text">Frecuentes</span></h2>
+      </div>
+      <!-- EDITAR: Modificar las preguntas y respuestas del FAQ -->
+      <div class="space-y-3 reveal">
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Qué es el IEN?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">El Ingreso Escolar Nacional (IEN) es una modalidad de ingreso a la Universidad Nacional de Ingeniería (UNI) exclusiva para estudiantes de 5º año de secundaria. A diferencia del examen ordinario, solo compites con personas de tu mismo nivel educativo, lo que representa una ventaja significativa.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Quiénes pueden postular?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">Pueden postular todos los estudiantes que estén cursando 5º año de secundaria en colegios nacionales o particulares en el año del proceso. No importa de qué colegio vengas, siempre y cuando cumplas con estar en tu último año de secundaria.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Cómo es el examen?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">El examen IEN consta de preguntas de opción múltiple que evalúan las áreas del temario oficial: Aptitud Académica (Razonamiento Matemático y Verbal), Matemática (Aritmética, Álgebra, Geometría, Trigonometría), Ciencias (Física, Química) y Humanidades. La duración y el puntaje máximo varían según las bases del año.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Qué cursos vienen en el examen?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">Los cursos que se evalúan son: Razonamiento Matemático, Razonamiento Verbal, Aritmética, Álgebra, Geometría, Trigonometría, Física, Química, Historia del Perú, Historia Universal, Geografía, Economía, Filosofía, Psicología, Educación Cívica y Actualidad. Revisa nuestro temario completo para más detalles.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Cuántas vacantes hay?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">Las vacantes varían cada año según las bases publicadas por la UNI. Generalmente hay entre 2 y 5 vacantes por especialidad en la modalidad IEN. Consulta nuestra sección de Vacantes para ver los datos actualizados del proceso actual.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Cómo usar la biblioteca?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">Nuestra biblioteca está organizada por carpetas en Google Drive. Solo debes hacer clic en la carpeta que necesites (PDFs, Separatas, Libros, etc.) y se abrirá el contenido. Todo es gratuito y accesible sin necesidad de registro.</p>
+          </div>
+        </div>
+        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden">
+          <button class="faq-btn w-full flex items-center justify-between p-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+            <span class="font-semibold text-dark-900 text-sm pr-4">¿Dónde encuentro los solucionarios?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 faq-icon transition-transform duration-300 flex-shrink-0"></i>
+          </button>
+          <div class="faq-content hidden px-5 pb-5">
+            <p class="text-sm text-slate-500 leading-relaxed">Todos nuestros solucionarios están en la sección "Solucionarios" de esta página y en nuestro canal de YouTube. Están organizados por semana, curso y academia para que encuentres rápidamente lo que necesitas. También puedes filtrar por curso usando los botones de filtro.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== CONTACTO ============================== -->
+  <section id="contacto" class="geo-bg-light py-20 lg:py-28">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <span class="inline-block text-xs font-bold tracking-widest uppercase text-brand-600 bg-brand-100 px-4 py-2 rounded-full mb-4">Escríbenos</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-dark-900 tracking-tight">Contacto</h2>
+      </div>
+      <form class="reveal bg-white rounded-3xl p-8 border border-slate-100 shadow-sm" onsubmit="handleContact(event)">
+        <div class="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="text-xs font-semibold text-slate-500 mb-1 block">Nombre</label>
+            <input type="text" required class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Tu nombre">
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-slate-500 mb-1 block">Email</label>
+            <input type="email" required class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="tu@email.com">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="text-xs font-semibold text-slate-500 mb-1 block">Asunto</label>
+          <input type="text" required class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="¿En qué podemos ayudarte?">
+        </div>
+        <div class="mb-6">
+          <label class="text-xs font-semibold text-slate-500 mb-1 block">Mensaje</label>
+          <textarea rows="4" required class="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none" placeholder="Escribe tu mensaje..."></textarea>
+        </div>
+        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl transition-all text-sm">Enviar Mensaje</button>
+        <div id="contactMsg" class="hidden mt-4 text-center text-sm font-semibold text-green-600 bg-green-50 rounded-xl p-3"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="bg-dark-950 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <!-- Brand -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
+            </div>
+            <span class="text-lg font-bold text-white">IEN UNI <span class="text-brand-400">HUB</span></span>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">"La comunidad del Ingreso Escolar Nacional."</p>
+          <p class="text-xs text-slate-500 mt-3">La primera plataforma especializada en el IEN de la UNI.</p>
+        </div>
+        <!-- Accesos rápidos -->
+        <div>
+          <h4 class="font-bold text-white text-sm mb-4">Accesos Rápidos</h4>
+          <div class="space-y-2">
+            <a href="#biblioteca" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Biblioteca</a>
+            <a href="#solucionarios" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Solucionarios</a>
+            <a href="#temario" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Temario</a>
+            <a href="#examenes" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Exámenes</a>
+            <a href="#cronograma" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Cronograma</a>
+            <a href="#vacantes" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Vacantes</a>
+          </div>
+        </div>
+        <!-- Comunidad -->
+        <div>
+          <h4 class="font-bold text-white text-sm mb-4">Comunidad</h4>
+          <div class="space-y-2">
+            <a href="#comunidad" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Redes Sociales</a>
+            <a href="https://wa.me/51999999999" target="_blank" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">WhatsApp</a>
+            <a href="https://youtube.com" target="_blank" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">YouTube</a>
+            <a href="https://discord.gg/" target="_blank" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Discord</a>
+          </div>
+        </div>
+        <!-- Legal -->
+        <div>
+          <h4 class="font-bold text-white text-sm mb-4">Legal</h4>
+          <div class="space-y-2">
+            <a href="#" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Política de Privacidad</a>
+            <a href="#" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Términos y Condiciones</a>
+            <a href="#contacto" class="block text-sm text-slate-400 hover:text-brand-400 transition-colors">Contacto</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-slate-500">© 2025 IEN UNI HUB. Todos los derechos reservados. No estamos afiliados a la UNI.</p>
+        <div class="flex items-center gap-1 text-xs text-slate-500">
+          Hecho con <i data-lucide="heart" class="w-3 h-3 text-red-500 inline"></i> por estudiantes para estudiantes
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/51999999999" target="_blank" class="wa-float" aria-label="WhatsApp">
+    <!-- EDITAR: Cambiar el número de WhatsApp -->
+    <i data-lucide="message-circle" class="w-7 h-7 relative z-10"></i>
+  </a>
+
+  <!-- ============================== JAVASCRIPT ============================== -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // ===== MOBILE MENU =====
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    let menuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      menuIcon.setAttribute('data-lucide', menuOpen ? 'x' : 'menu');
+      lucide.createIcons();
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu.classList.remove('open');
+        menuIcon.setAttribute('data-lucide', 'menu');
+        lucide.createIcons();
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ===== NAVBAR SCROLL EFFECT =====
+    const navbar = document.getElementById('navbar');
+    const logoText = document.querySelector('.nav-logo-text');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add('bg-dark-900/95', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/10');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-dark-900/95', 'backdrop-blur-xl', 'shadow-lg', 'shadow-black/10');
+        navbar.classList.add('bg-transparent');
+      }
+    });
+
+    // ===== SCROLL REVEAL =====
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ===== COUNT UP ANIMATION =====
+    const countEls = document.querySelectorAll('[data-count]');
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.getAttribute('data-count'));
+          let current = 0;
+          const step = Math.max(1, Math.floor(target / 40));
+          const interval = setInterval(() => {
+            current += step;
+            if (current >= target) { current = target; clearInterval(interval); }
+            el.textContent = current;
+          }, 30);
+          countObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    countEls.forEach(el => countObserver.observe(el));
+
+    // ===== SOLUCIONARIOS FILTER =====
+    document.querySelectorAll('.sol-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sol-filter').forEach(b => {
+          b.classList.remove('active-filter', 'bg-brand-600', 'text-white');
+          b.classList.add('bg-white/10', 'text-white/70');
+        });
+        btn.classList.add('active-filter', 'bg-brand-600', 'text-white');
+        btn.classList.remove('bg-white/10', 'text-white/70');
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.sol-card').forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-course') === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ===== VACANTES FILTER =====
+    document.querySelectorAll('.vac-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.vac-filter').forEach(b => {
+          b.classList.remove('active-filter', 'bg-brand-600', 'text-white');
+          b.classList.add('bg-slate-100', 'text-slate-600');
+        });
+        btn.classList.add('active-filter', 'bg-brand-600', 'text-white');
+        btn.classList.remove('bg-slate-100', 'text-slate-600');
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.vac-row').forEach(row => {
+          if (filter === 'all' || row.getAttribute('data-cat') === filter) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // ===== COUNTDOWN TIMER =====
+    // EDITAR: Cambiar la fecha objetivo del contador regresivo (formato: YYYY-MM-DDTHH:MM:SS)
+    const targetDate = new Date('2025-11-10T09:00:00').getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        document.getElementById('countDays').textContent = '00';
+        document.getElementById('countHours').textContent = '00';
+        document.getElementById('countMins').textContent = '00';
+        document.getElementById('countSecs').textContent = '00';
+        return;
+      }
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById('countDays').textContent = String(d).padStart(2, '0');
+      document.getElementById('countHours').textContent = String(h).padStart(2, '0');
+      document.getElementById('countMins').textContent = String(m).padStart(2, '0');
+      document.getElementById('countSecs').textContent = String(s).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===== TOOL TABS =====
+    document.querySelectorAll('.tool-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tool-tab').forEach(t => {
+          t.classList.remove('active-tab', 'bg-brand-600', 'text-white');
+          t.classList.add('bg-white', 'text-slate-600');
+        });
+        tab.classList.add('active-tab', 'bg-brand-600', 'text-white');
+        tab.classList.remove('bg-white', 'text-slate-600');
+        document.querySelectorAll('.tool-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById('tool-' + tab.getAttribute('data-tool')).classList.remove('hidden');
+      });
+    });
+
+    // ===== CALCULADORA PUNTAJE =====
+    function calcularPuntaje() {
+      const c = parseInt(document.getElementById('calcCorrectas').value) || 0;
+      const i = parseInt(document.getElementById('calcIncorrectas').value) || 0;
+      const b = parseInt(document.getElementById('calcBlancas').value) || 0;
+      const total = parseInt(document.getElementById('calcTotal').value) || 60;
+      const puntajePorQ = 1000 / total;
+      const penalizacion = puntajePorQ / 4;
+      const puntaje = Math.max(0, (c * puntajePorQ) - (i * penalizacion));
+      document.getElementById('puntajeValor').textContent = puntaje.toFixed(2);
+      document.getElementById('puntajeObs').textContent = `${c} correctas × ${puntajePorQ.toFixed(2)} pts − ${i} incorrectas × ${penalizacion.toFixed(2)} pts de penalización`;
+      document.getElementById('puntajeResult').classList.remove('hidden');
+    }
+
+    // ===== CALCULADORA PROMEDIO =====
+    function calcularPromedio() {
+      const notes = document.querySelectorAll('.prom-note');
+      let sum = 0, count = 0;
+      notes.forEach(n => {
+        const v = parseFloat(n.value);
+        if (!isNaN(v) && v >= 0 && v <= 20) { sum += v; count++; }
+      });
+      if (count === 0) return;
+      document.getElementById('promValor').textContent = (sum / count).toFixed(2);
+      document.getElementById('promResult').classList.remove('hidden');
+    }
+
+    let notaCount = 4;
+    function addNota() {
+      notaCount++;
+      const container = document.getElementById('promInputs');
+      const div = document.createElement('div');
+      div.className = 'flex items-center gap-3';
+      div.innerHTML = `<span class="text-xs font-semibold text-slate-400 w-16">Nota ${notaCount}</span>
+        <input type="number" class="prom-note w-full border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" value="" placeholder="0 - 20" min="0" max="20">`;
+      container.appendChild(div);
+    }
+
+    // ===== POMODORO =====
+    let pomoTime = 25 * 60;
+    let pomoMax = 25 * 60;
+    let pomoInterval = null;
+    let pomoRunning = false;
+
+    function updatePomoDisplay() {
+      const m = Math.floor(pomoTime / 60);
+      const s = pomoTime % 60;
+      document.getElementById('pomoTimer').textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      const offset = 565.48 * (1 - pomoTime / pomoMax);
+      document.getElementById('pomoRing').setAttribute('stroke-dashoffset', offset);
+    }
+
+    function setPomodoro(mins) {
+      clearInterval(pomoInterval);
+      pomoRunning = false;
+      pomoTime = mins * 60;
+      pomoMax = mins * 60;
+      document.getElementById('pomoStartBtn').textContent = 'Iniciar';
+      document.getElementById('pomoLabel').textContent = mins <= 10 ? 'Descanso' : 'Enfoque';
+      document.querySelectorAll('.pomo-preset').forEach(b => {
+        b.classList.remove('bg-brand-600', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-600');
+      });
+      event.target.classList.add('bg-brand-600', 'text-white');
+      event.target.classList.remove('bg-slate-100', 'text-slate-600');
+      updatePomoDisplay();
+    }
+
+    function startPomodoro() {
+      if (pomoRunning) {
+        clearInterval(pomoInterval);
+        pomoRunning = false;
+        document.getElementById('pomoStartBtn').textContent = 'Continuar';
+        return;
+      }
+      pomoRunning = true;
+      document.getElementById('pomoStartBtn').textContent = 'Pausar';
+      pomoInterval = setInterval(() => {
+        if (pomoTime <= 0) {
+          clearInterval(pomoInterval);
+          pomoRunning = false;
+          document.getElementById('pomoStartBtn').textContent = 'Iniciar';
+          document.getElementById('pomoLabel').textContent = '¡Tiempo!';
+          return;
+        }
+        pomoTime--;
+        updatePomoDisplay();
+      }, 1000);
+    }
+
+    function resetPomodoro() {
+      clearInterval(pomoInterval);
+      pomoRunning = false;
+      pomoTime = pomoMax;
+      document.getElementById('pomoStartBtn').textContent = 'Iniciar';
+      document.getElementById('pomoLabel').textContent = pomoMax <= 600 ? 'Descanso' : 'Enfoque';
+      updatePomoDisplay();
+    }
+
+    // ===== CRONÓMETRO =====
+    let cronoTime = 0;
+    let cronoInterval = null;
+    let cronoRunning = false;
+    let lapCount = 0;
+
+    function updateCronoDisplay() {
+      const mins = Math.floor(cronoTime / 6000);
+      const secs = Math.floor((cronoTime % 6000) / 100);
+      const ms = cronoTime % 100;
+      document.getElementById('cronoDisplay').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
+    }
+
+    function startCrono() {
+      if (cronoRunning) return;
+      cronoRunning = true;
+      document.getElementById('cronoStartBtn').classList.add('hidden');
+      document.getElementById('cronoPauseBtn').classList.remove('hidden');
+      document.getElementById('cronoLapBtn').classList.remove('hidden');
+      cronoInterval = setInterval(() => {
+        cronoTime++;
+        updateCronoDisplay();
+      }, 10);
+    }
+
+    function pauseCrono() {
+      clearInterval(cronoInterval);
+      cronoRunning = false;
+      document.getElementById('cronoStartBtn').classList.remove('hidden');
+      document.getElementById('cronoStartBtn').textContent = 'Continuar';
+      document.getElementById('cronoPauseBtn').classList.add('hidden');
+    }
+
+    function resetCrono() {
+      clearInterval(cronoInterval);
+      cronoRunning = false;
+      cronoTime = 0;
+      lapCount = 0;
+      document.getElementById('cronoStartBtn').classList.remove('hidden');
+      document.getElementById('cronoStartBtn').textContent = 'Iniciar';
+      document.getElementById('cronoPauseBtn').classList.add('hidden');
+      document.getElementById('cronoLapBtn').classList.add('hidden');
+      document.getElementById('cronoLaps').innerHTML = '';
+      updateCronoDisplay();
+    }
+
+    function lapCrono() {
+      lapCount++;
+      const mins = Math.floor(cronoTime / 6000);
+      const secs = Math.floor((cronoTime % 6000) / 100);
+      const ms = cronoTime % 100;
+      const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${String(ms).padStart(2, '0')}`;
+      const div = document.createElement('div');
+      div.className = 'flex justify-between text-sm bg-slate-50 rounded-lg px-4 py-2';
+      div.innerHTML = `<span class="text-slate-400 font-medium">Lap ${lapCount}</span><span class="font-mono font-semibold text-dark-900">${timeStr}</span>`;
+      document.getElementById('cronoLaps').prepend(div);
+    }
+
+    // ===== CHECKLIST =====
+    let checkItems = [];
+    function addCheckItem() {
+      const input = document.getElementById('checkInput');
+      const text = input.value.trim();
+      if (!text) return;
+      checkItems.push({ text, done: false });
+      input.value = '';
+      renderChecks();
+    }
+
+    function toggleCheck(idx) {
+      checkItems[idx].done = !checkItems[idx].done;
+      renderChecks();
+    }
+
+    function removeCheck(idx) {
+      checkItems.splice(idx, 1);
+      renderChecks();
+    }
+
+    function clearChecks() {
+      checkItems = [];
+      renderChecks();
+    }
+
+    function renderChecks() {
+      const container = document.getElementById('checkList');
+      if (checkItems.length === 0) {
+        container.innerHTML = '<p class="text-sm text-slate-400 text-center py-8">No hay tareas aún. Agrega una arriba.</p>';
+      } else {
+        container.innerHTML = checkItems.map((item, i) => `
+          <div class="flex items-center gap-3 p-3 rounded-xl ${item.done ? 'bg-green-50' : 'bg-slate-50'} group">
+            <button onclick="toggleCheck(${i})" class="w-5 h-5 rounded-md border-2 ${item.done ? 'bg-green-500 border-green-500' : 'border-slate-300'} flex items-center justify-center flex-shrink-0 transition-colors">
+              ${item.done ? '<i data-lucide="check" class="w-3 h-3 text-white"></i>' : ''}
+            </button>
+            <span class="flex-1 text-sm ${item.done ? 'line-through text-slate-400' : 'text-dark-900'}">${item.text}</span>
+            <button onclick="removeCheck(${i})" class="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600 transition-all"><i data-lucide="x" class="w-4 h-4"></i></button>
+          </div>
+        `).join('');
+      }
+      const done = checkItems.filter(i => i.done).length;
+      document.getElementById('checkCount').textContent = `${done}/${checkItems.length} completadas`;
+      lucide.createIcons();
+    }
+    renderChecks();
+
+    // ===== FAQ ACCORDION =====
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = !content.classList.contains('hidden');
+      // Close all
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
+      if (!isOpen) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // ===== CONTACT FORM =====
+    function handleContact(e) {
+      e.preventDefault();
+      const msg = document.getElementById('contactMsg');
+      msg.textContent = '✓ Mensaje enviado correctamente. Te responderemos pronto.';
+      msg.classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => msg.classList.add('hidden'), 4000);
+    }
+  </script>
+</body>
+</html>
